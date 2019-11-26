@@ -1,0 +1,14 @@
+{
+    "extends": "standard",
+    "rules": {
+        ////////// Stylistic Issues //////////
+        "indent": 0, // enforce consistent indentation (indent)
+        "operator-linebreak": 0, // enforce consistent linebreak style for operators (operator-linebreak)
+        "padded-blocks": 0, // enforce padding within blocks (off by default)
+        "semi": 0, // require or disallow semicolons instead of ASI (semi)
+        "space-before-function-paren": 0,
+
+        ////////// Variables //////////
+        "no-undef": 0 // disallow use of undeclared variables unless mentioned in a /*global */ block
+    }
+}

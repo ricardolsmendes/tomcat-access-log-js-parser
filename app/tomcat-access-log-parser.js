@@ -25,7 +25,7 @@ function parseCommonFormat(line) {
 
     const matches = commonFormatRegex.exec(line)
 
-    var logData = new Object();
+    var logData = {};
     logData.remoteHost = matches.groups.remoteHost;
     logData.remoteUser = matches.groups.remoteUser;
     logData.dateTime = matches.groups.dateTime;
