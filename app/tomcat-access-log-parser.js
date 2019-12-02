@@ -12,12 +12,12 @@
  * %s - HTTP status code of the response;
  * %b - Bytes sent, excluding HTTP headers, or '-' if zero.
  */
-const months = [
+const MONTHS = [
   'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 ];
 
-const commonLogFormatRegex = new RegExp('' +
+const COMMON_LOG_FORMAT_REGEX = new RegExp('' +
   /(?<remoteHost>.+)[\s]/.source +
   /-[\s]/.source +
   /(?<remoteUser>.+)[\s]/.source +
@@ -27,7 +27,7 @@ const commonLogFormatRegex = new RegExp('' +
   /(?<bytesSent>.+)$/.source
 );
 
-const commonLogFormatDatetimeRegex = new RegExp('' +
+const COMMON_LOG_FORMAT_DATETIME_REGEX = new RegExp('' +
   /(?<day>\d{2})\/(?<month>\w{3})\/(?<year>\d{4})/.source +
   /:/.source +
   /(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})[\s]/.source +
@@ -36,7 +36,7 @@ const commonLogFormatDatetimeRegex = new RegExp('' +
 
 function parseCommonFormat(line) {
 
-  const matches = commonLogFormatRegex.exec(line)
+  const matches = COMMON_LOG_FORMAT_REGEX.exec(line)
 
   const remoteUser = matches.groups.remoteUser;
   const bytesSent = matches.groups.bytesSent;
@@ -54,11 +54,11 @@ function parseCommonFormat(line) {
 
 function parseCommonFormatDatetime(datetimeString) {
 
-  const matches = commonLogFormatDatetimeRegex.exec(datetimeString)
+  const matches = COMMON_LOG_FORMAT_DATETIME_REGEX.exec(datetimeString)
 
   return new Date(
     matches.groups.year +
-    '-' + (months.indexOf(matches.groups.month) + 1).toString() +
+    '-' + (MONTHS.indexOf(matches.groups.month) + 1).toString() +
     '-' + matches.groups.day +
     'T' + matches.groups.hour +
     ':' + matches.groups.minute +
@@ -68,5 +68,5 @@ function parseCommonFormatDatetime(datetimeString) {
 }
 
 module.exports = {
-  parseCommonFormat
+  parseCommonFormat: parseCommonFormat
 }
