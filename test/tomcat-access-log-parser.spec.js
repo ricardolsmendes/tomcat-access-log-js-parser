@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var logParser = require('../app/tomcat-access-log-parser');
+var logParser = require('../src/tomcat-access-log-parser');
 
 describe('tomcat-access-log-parser', function() {
 

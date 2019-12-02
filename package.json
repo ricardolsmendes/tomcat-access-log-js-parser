@@ -12,7 +12,7 @@
     "url": "https://github.com/ricardolsmendes/tomcat-access-log-js-parser/issues"
   },
   "author": "Ricardo Mendes <ricardolsmendes@gmail.com>",
-  "main": "app/tomcat-access-log-parser.js",
+  "main": "src/tomcat-access-log-parser.js",
   "scripts": {
     "test": "mocha"
   },
