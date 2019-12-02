@@ -12,18 +12,31 @@
  * %s - HTTP status code of the response;
  * %b - Bytes sent, excluding HTTP headers, or '-' if zero.
  */
-function parseCommonFormat(line) {
-  const commonFormatRegex = new RegExp('' +
-    /(?<remoteHost>.+)[\s]/.source +
-    /-[\s]/.source +
-    /(?<remoteUser>.+)[\s]/.source +
-    /\[(?<datetime>.+)\][\s]/.source +
-    /"(?<request>.+)"[\s]/.source +
-    /(?<httpStatus>\d{3})[\s]/.source +
-    /(?<bytesSent>.+)$/.source
-  );
+const months = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+];
 
-  const matches = commonFormatRegex.exec(line)
+const commonLogFormatRegex = new RegExp('' +
+  /(?<remoteHost>.+)[\s]/.source +
+  /-[\s]/.source +
+  /(?<remoteUser>.+)[\s]/.source +
+  /\[(?<datetime>.+)\][\s]/.source +
+  /"(?<request>.+)"[\s]/.source +
+  /(?<httpStatus>\d{3})[\s]/.source +
+  /(?<bytesSent>.+)$/.source
+);
+
+const commonLogFormatDatetimeRegex = new RegExp('' +
+  /(?<day>\d{2})\/(?<month>\w{3})\/(?<year>\d{4})/.source +
+  /:/.source +
+  /(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})[\s]/.source +
+  /(?<timezone>.{5})/.source
+);
+
+function parseCommonFormat(line) {
+
+  const matches = commonLogFormatRegex.exec(line)
 
   const remoteUser = matches.groups.remoteUser;
   const bytesSent = matches.groups.bytesSent;
@@ -40,20 +53,12 @@ function parseCommonFormat(line) {
 }
 
 function parseCommonFormatDatetime(datetimeString) {
-  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  const commonLogFmtRegex = new RegExp('' +
-    /(?<day>\d{2})\/(?<month>\w{3})\/(?<year>\d{4})/.source +
-    /:/.source +
-    /(?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})[\s]/.source +
-    /(?<timezone>.{5})/.source
-  );
-
-  const matches = commonLogFmtRegex.exec(datetimeString)
+  const matches = commonLogFormatDatetimeRegex.exec(datetimeString)
 
   return new Date(
     matches.groups.year +
-    '-' + (monthNames.indexOf(matches.groups.month) + 1).toString() +
+    '-' + (months.indexOf(matches.groups.month) + 1).toString() +
     '-' + matches.groups.day +
     'T' + matches.groups.hour +
     ':' + matches.groups.minute +

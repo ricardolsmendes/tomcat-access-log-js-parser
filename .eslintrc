@@ -2,11 +2,11 @@
   "extends": "standard",
   "rules": {
     ////////// Stylistic Issues //////////
-    "indent": ["error", 2], // enforce consistent indentation (indent)
+    "indent": ["error", 2], // consistent indentation (indent)
     "max-len": ["error", {
-      "code": 120 // enforces a maximum line length to increase code readability and maintainability
+      "code": 100 // a maximum line length to increase code readability and maintainability
     }],
-    "operator-linebreak": 0, // enforce consistent linebreak style for operators (operator-linebreak)
+    "operator-linebreak": 0, // consistent linebreak style for operators (operator-linebreak)
     "padded-blocks": 0, // enforce padding within blocks (off by default)
     "semi": 0, // require or disallow semicolons instead of ASI (semi)
     "space-before-function-paren": 0,
