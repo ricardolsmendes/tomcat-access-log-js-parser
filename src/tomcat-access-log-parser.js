@@ -35,8 +35,7 @@ const COMMON_LOG_FORMAT_DATETIME_REGEX = new RegExp('' +
 );
 
 function parseCommonFormat(line) {
-
-  const matches = COMMON_LOG_FORMAT_REGEX.exec(line)
+  const matches = COMMON_LOG_FORMAT_REGEX.exec(line);
 
   const remoteUser = matches.groups.remoteUser;
   const bytesSent = matches.groups.bytesSent;
@@ -53,8 +52,7 @@ function parseCommonFormat(line) {
 }
 
 function parseCommonFormatDatetime(datetimeString) {
-
-  const matches = COMMON_LOG_FORMAT_DATETIME_REGEX.exec(datetimeString)
+  const matches = COMMON_LOG_FORMAT_DATETIME_REGEX.exec(datetimeString);
 
   return new Date(
     matches.groups.year +
@@ -69,4 +67,4 @@ function parseCommonFormatDatetime(datetimeString) {
 
 module.exports = {
   parseCommonFormat: parseCommonFormat
-}
+};
