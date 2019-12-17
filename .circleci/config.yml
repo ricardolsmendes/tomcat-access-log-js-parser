@@ -21,8 +21,8 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
 
       - run:
-          name: Install dependencies
-          command: npm install
+          name: Install the project with a clean slate
+          command: npm ci
 
       - save_cache: # Special step to save the dependency cache.
           key: dependency-cache-{{ checksum "package-lock.json" }}
