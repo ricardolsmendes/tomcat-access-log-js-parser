@@ -14,14 +14,18 @@
     "padded-blocks": ["error", { // enforce padding within blocks (off by default)
       "classes": "always"
     }],
-    "quotes": ["error", "single", {
+    "quotes": ["error", "single", { // consistent use of either backticks, double, or single quotes
       "allowTemplateLiterals": true,
       "avoidEscape": true
     }],
-    "semi": [2, "always"], // require semicolons instead of ASI
-    "space-before-function-paren": 0,
+    "semi": ["error", "always"], // require semicolons instead of ASI
+    "space-before-function-paren": ["error", { // consistent spacing before function parentheses
+      "anonymous": "never",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
 
     ////////// Variables //////////
-    "no-undef": 0 // disallow use of undeclared variables unless mentioned in a /*global */ block
+    "no-undef": "off" // disallow use of undeclared variables unless mentioned in a global block
   }
 }

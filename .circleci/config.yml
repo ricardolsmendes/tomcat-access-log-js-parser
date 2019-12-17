@@ -31,7 +31,7 @@ jobs:
 
       - run:
           name: Run eslint over source and test files
-          command: ./node_modules/.bin/eslint ./src ./test
+          command: npm run lint
 
       - run:
           name: Run the unit tests
