@@ -1,3 +1,5 @@
+'use strict';
+
 const assert = require('assert');
 
 const logParser = require('../src/tomcat-access-log-parser');
