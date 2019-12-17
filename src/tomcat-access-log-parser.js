@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * From https://tomcat.apache.org/tomcat-8.0-doc/config/valve.html#Access_Log_Valve:
  *
