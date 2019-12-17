@@ -13,8 +13,7 @@
  * %b - Bytes sent, excluding HTTP headers, or '-' if zero.
  */
 const MONTHS = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 ];
 
 const COMMON_LOG_FORMAT_REGEX = new RegExp('' +
@@ -53,15 +52,11 @@ function parseCommonFormat(line) {
 
 function parseCommonFormatDatetime(datetimeString) {
   const matches = COMMON_LOG_FORMAT_DATETIME_REGEX.exec(datetimeString);
+  const groups = matches.groups;
 
   return new Date(
-    matches.groups.year +
-    '-' + (MONTHS.indexOf(matches.groups.month) + 1).toString() +
-    '-' + matches.groups.day +
-    'T' + matches.groups.hour +
-    ':' + matches.groups.minute +
-    ':' + matches.groups.second + '.000' +
-    matches.groups.timezone
+    `${groups.year}-${(MONTHS.indexOf(groups.month) + 1).toString()}-${groups.day}` +
+    `T${groups.hour}:${groups.minute}:${groups.second}.000${groups.timezone}`
   );
 }
 

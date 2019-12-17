@@ -14,6 +14,10 @@
     "padded-blocks": ["error", { // enforce padding within blocks (off by default)
       "classes": "always"
     }],
+    "quotes": ["error", "single", {
+      "allowTemplateLiterals": true,
+      "avoidEscape": true
+    }],
     "semi": [2, "always"], // require semicolons instead of ASI
     "space-before-function-paren": 0,
 
