@@ -62,6 +62,4 @@ function parseCommonFormatDatetime(datetimeString) {
   );
 }
 
-module.exports = {
-  parseCommonFormat: parseCommonFormat
-};
+module.exports = { parseCommonFormat: parseCommonFormat };

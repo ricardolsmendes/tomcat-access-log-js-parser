@@ -1,7 +1,3 @@
-const {
-  parseCommonFormat
-} = require('../src/tomcat-access-log-parser');
+const { parseCommonFormat } = require('../src/tomcat-access-log-parser');
 
-module.exports = {
-  parseCommonFormat: parseCommonFormat
-};
+module.exports = { parseCommonFormat: parseCommonFormat };
