@@ -1,6 +1,6 @@
 {
   "name": "tomcat-access-log-parser",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Function that parses a Tomcat access log [line] into a JSON string.",
   "license": "MIT",
   "homepage": "https://github.com/ricardolsmendes/tomcat-access-log-js-parser#readme",
@@ -12,16 +12,16 @@
     "url": "https://github.com/ricardolsmendes/tomcat-access-log-js-parser/issues"
   },
   "author": "Ricardo Mendes <ricardolsmendes@gmail.com>",
-  "main": "src/tomcat-access-log-parser.js",
+  "main": "src/index.js",
   "scripts": {
     "fix": "eslint --fix ./src ./test",
     "lint": "eslint ./src ./test",
     "test": "mocha"
   },
   "devDependencies": {
-    "eslint": "^6.7.1",
+    "eslint": "^6.7.2",
     "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
