@@ -34,5 +34,12 @@ jobs:
           command: npm run lint
 
       - run:
-          name: Run the unit tests
-          command: npm test
+          name: Run the tests and check coverage
+          command: npm run coverage
+
+      - store_test_results:
+          path: test-results
+
+      - store_artifacts:
+          path: coverage
+          destination: coverage

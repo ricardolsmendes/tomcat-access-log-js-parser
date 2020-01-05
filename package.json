@@ -12,19 +12,23 @@
     "url": "https://github.com/ricardolsmendes/tomcat-access-log-js-parser/issues"
   },
   "author": "Ricardo Mendes <ricardolsmendes@gmail.com>",
-  "main": "src/index.js",
+  "main": "./src/index.js",
   "scripts": {
+    "coverage": "nyc npm test",
     "fix": "eslint --fix ./src ./test",
     "lint": "eslint ./src ./test",
-    "test": "mocha"
+    "test": "mocha --reporter mocha-multi-reporters --reporter-options configFile=./mocha-multi-reporters.json"
   },
   "devDependencies": {
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "mocha": "^6.2.2"
+    "mocha": "^7.0.0",
+    "mocha-junit-reporter": "^1.23.1",
+    "mocha-multi-reporters": "^1.1.7",
+    "nyc": "^15.0.0"
   }
 }
