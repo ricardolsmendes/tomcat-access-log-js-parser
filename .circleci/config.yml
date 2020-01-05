@@ -37,6 +37,9 @@ jobs:
           name: Run the tests and check coverage
           command: npm run coverage
 
+      - store_test_results:
+          path: test-results
+
       - store_artifacts:
           path: coverage
-          destination: coverage-report
+          destination: coverage-results
