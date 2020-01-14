@@ -2,7 +2,10 @@
 
 const assert = require('assert');
 
-const { parseCommonFormat } = require('../src');
+const {
+  parseCommonFormat,
+  parseCommonFormatSnakeCaseKeys
+} = require('../src');
 
 describe('tomcat-access-log-parser', () => {
 
@@ -62,6 +65,38 @@ describe('tomcat-access-log-parser', () => {
       const logData = JSON.parse(
         parseCommonFormat('127.0.0.1 - - [23/Nov/2019:23:59:52 -0200] "GET" 200 482'));
       assert.strictEqual(logData.bytesSent, 482);
+    });
+
+  });
+
+  describe('parseCommonFormatSnakeCaseKeys', () => {
+
+    it('parses the remote_host attribute', () => {
+      const logData = JSON.parse(
+        parseCommonFormatSnakeCaseKeys(
+          '127.0.0.1 - - [23/Nov/2019:23:59:52 -0200] "GET" 200 482'));
+      assert.strictEqual(logData.remote_host, '127.0.0.1');
+    });
+
+    it('parses the remote_user attribute', () => {
+      const logData = JSON.parse(
+        parseCommonFormatSnakeCaseKeys(
+          '127.0.0.1 - user_id [23/Nov/2019:23:59:52 -0200] "GET" 200 482'));
+      assert.strictEqual(logData.remote_user, 'user_id');
+    });
+
+    it('parses the http_status attribute', () => {
+      const logData = JSON.parse(
+        parseCommonFormatSnakeCaseKeys(
+          '127.0.0.1 - - [23/Nov/2019:23:59:52 -0200] "GET" 200 482'));
+      assert.strictEqual(logData.http_status, 200);
+    });
+
+    it('parses the bytes_sent attribute', () => {
+      const logData = JSON.parse(
+        parseCommonFormatSnakeCaseKeys(
+          '127.0.0.1 - - [23/Nov/2019:23:59:52 -0200] "GET" 200 482'));
+      assert.strictEqual(logData.bytes_sent, 482);
     });
 
   });

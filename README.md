@@ -1,12 +1,12 @@
 # tomcat-access-log-js-parser
 
-Javascript function that parses a Tomcat access log [line] into a JSON string.
+Javascript functions that parse a Tomcat access log line into a JSON string.
 
 [![js-standard-style][1]][2] [![CircleCI][3]][4]
 
-The `parseCommonFormat(line)` function was designed to use only JS native resources and return the
-log line converted to a JSON string, so it may used by workloads running in restricted Node.js
-environments.
+The `parseCommonFormat(line)` and `parseCommonFormatSnakeCaseKeys(line)` functions use only
+built-in Javascript features and return the log entry converted into a JSON string. They were
+designed to work properly even in resource-limited Node.js environments.
 
 For more features, types, and object-oriented design, please consider [access-logs-js-parser][5],
 which is built upon this library and adds an abstraction layer over it.

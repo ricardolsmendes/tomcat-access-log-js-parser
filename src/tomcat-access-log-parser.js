@@ -41,7 +41,7 @@ function parseCommonFormat(line) {
   const remoteUser = matches.groups.remoteUser;
   const bytesSent = matches.groups.bytesSent;
 
-  var logData = {};
+  const logData = {};
   logData.remoteHost = matches.groups.remoteHost;
   logData.remoteUser = remoteUser !== '-' ? remoteUser : null;
   logData.datetime = parseCommonFormatDatetime(matches.groups.datetime);
@@ -50,6 +50,19 @@ function parseCommonFormat(line) {
   logData.bytesSent = bytesSent !== '-' ? parseInt(bytesSent) : null;
 
   return JSON.stringify(logData);
+}
+
+function parseCommonFormatSnakeCaseKeys(line) {
+  const logData = JSON.parse(parseCommonFormat(line));
+  const snakeCaseKeysLogData = {};
+
+  Object.entries(logData).forEach(([key, value]) => {
+    const snakeCaseKey = key.replace(/(.)([A-Z][a-z]+)/, '$1_$2').replace(/([a-z0-9])([A-Z])/,
+      '$1_$2').toLowerCase();
+    snakeCaseKeysLogData[snakeCaseKey] = value;
+  });
+
+  return JSON.stringify(snakeCaseKeysLogData);
 }
 
 function parseCommonFormatDatetime(datetimeString) {
@@ -62,4 +75,7 @@ function parseCommonFormatDatetime(datetimeString) {
   );
 }
 
-module.exports = { parseCommonFormat: parseCommonFormat };
+module.exports = {
+  parseCommonFormat: parseCommonFormat,
+  parseCommonFormatSnakeCaseKeys: parseCommonFormatSnakeCaseKeys
+};
