@@ -47,7 +47,7 @@ function parseCommonFormat(line) {
   logData.datetime = parseCommonFormatDatetime(matches.groups.datetime);
   logData.request = matches.groups.request;
   logData.httpStatus = parseInt(matches.groups.httpStatus);
-  logData.bytesSent = bytesSent !== '-' ? parseInt(bytesSent) : null;
+  logData.bytesSent = bytesSent !== '-' ? parseInt(bytesSent) : 0;
 
   return JSON.stringify(logData);
 }
