@@ -1,5 +1,8 @@
 {
   "all": true,
+  "include": [
+    "src/**/*.js"
+  ],
 
   "check-coverage": true,
   "branches": 95,

@@ -36,17 +36,18 @@ const COMMON_LOG_FORMAT_DATETIME_REGEX = new RegExp('' +
 );
 
 function parseCommonFormat(line) {
-  const matches = COMMON_LOG_FORMAT_REGEX.exec(line);
+  var matches = line.match(COMMON_LOG_FORMAT_REGEX);
+  const groups = matches.groups;
 
-  const remoteUser = matches.groups.remoteUser;
-  const bytesSent = matches.groups.bytesSent;
+  const remoteUser = groups.remoteUser;
+  const bytesSent = groups.bytesSent;
 
   const logData = {};
-  logData.remoteHost = matches.groups.remoteHost;
+  logData.remoteHost = groups.remoteHost;
   logData.remoteUser = remoteUser !== '-' ? remoteUser : null;
-  logData.datetime = parseCommonFormatDatetime(matches.groups.datetime);
-  logData.request = matches.groups.request;
-  logData.httpStatus = parseInt(matches.groups.httpStatus);
+  logData.datetime = parseCommonFormatDatetime(groups.datetime);
+  logData.request = groups.request;
+  logData.httpStatus = parseInt(groups.httpStatus);
   logData.bytesSent = bytesSent !== '-' ? parseInt(bytesSent) : 0;
 
   return JSON.stringify(logData);
@@ -66,7 +67,7 @@ function parseCommonFormatSnakeCaseKeys(line) {
 }
 
 function parseCommonFormatDatetime(datetimeString) {
-  const matches = COMMON_LOG_FORMAT_DATETIME_REGEX.exec(datetimeString);
+  var matches = datetimeString.match(COMMON_LOG_FORMAT_DATETIME_REGEX);
   const groups = matches.groups;
 
   return new Date(
