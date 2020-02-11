@@ -38,6 +38,11 @@ var COMMON_LOG_FORMAT_DATETIME_REGEX = new RegExp('' +
 function parseCommonFormat(line) {
   var matches = line.match(COMMON_LOG_FORMAT_REGEX);
 
+  if (!matches) {
+    print(['Line does not match Common Log Format:', line].join(' '));
+    return;
+  }
+
   var remoteUser = matches[2];
   var bytesSent = matches[6];
 
@@ -68,8 +73,13 @@ function parseCommonFormatSnakeCaseKeys(line) { // eslint-disable-line no-unused
 function parseCommonFormatDatetime(datetimeString) {
   var matches = datetimeString.match(COMMON_LOG_FORMAT_DATETIME_REGEX);
 
-  return new Date(
-    matches[3] + '-' + (MONTHS.indexOf(matches[2]) + 1).toString() + '-' + matches[1] + 'T' +
-    matches[4] + ':' + matches[5] + ':' + matches[6] + '.000' + matches[7]
-  );
+  if (!matches) {
+    print('String does not match Date and time, in Common Log Format: ' + datetimeString);
+    return;
+  }
+
+  return new Date([
+    matches[3], '-', (MONTHS.indexOf(matches[2]) + 1).toString(), '-', matches[1],
+    'T', matches[4], ':', matches[5], ':', matches[6], '.000', matches[7]
+  ].join(''));
 }

@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('assert');
+const sinon = require('sinon');
 
 const {
   parseCommonFormat,
@@ -8,6 +9,12 @@ const {
 } = require('../src');
 
 describe('tomcat-access-log-parser', () => {
+
+  var consoleLogStub;
+
+  before(() => {
+    consoleLogStub = sinon.stub(console, 'log');
+  });
 
   describe('parseCommonFormat', () => {
 
@@ -42,6 +49,12 @@ describe('tomcat-access-log-parser', () => {
       assert.deepStrictEqual(logData.datetime, '2019-11-24T01:59:52.000Z');
     });
 
+    it('ignores the Datetime field when it does not match the pattern', () => {
+      const logData = JSON.parse(
+        parseCommonFormat('127.0.0.1 - - [23/Nov/2019:23:59:52-0200] "GET" 200 482'));
+      assert(!logData.datetime);
+    });
+
     it('parses the Request field', () => {
       const logData = JSON.parse(
         parseCommonFormat(
@@ -65,6 +78,12 @@ describe('tomcat-access-log-parser', () => {
       const logData = JSON.parse(
         parseCommonFormat('127.0.0.1 - - [23/Nov/2019:23:59:52 -0200] "GET" 200 -'));
       assert.strictEqual(logData.bytesSent, 0);
+    });
+
+    it('returns null when a given line does not match the pattern', () => {
+      const logData = parseCommonFormat(
+        '127.0.0.1--[23/Nov/2019:23:59:52 -0200]"GET"200-');
+      assert(!logData);
     });
 
   });
@@ -103,6 +122,10 @@ describe('tomcat-access-log-parser', () => {
       assert.strictEqual(logData.bytesSent, undefined);
     });
 
+  });
+
+  after(() => {
+    consoleLogStub.restore();
   });
 
 });

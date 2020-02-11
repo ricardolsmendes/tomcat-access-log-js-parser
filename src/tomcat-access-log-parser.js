@@ -37,6 +37,12 @@ const COMMON_LOG_FORMAT_DATETIME_REGEX = new RegExp('' +
 
 function parseCommonFormat(line) {
   var matches = line.match(COMMON_LOG_FORMAT_REGEX);
+
+  if (!matches) {
+    console.log(`Line does not match Common Log Format: ${line}`);
+    return;
+  }
+
   const groups = matches.groups;
 
   const remoteUser = groups.remoteUser;
@@ -68,6 +74,12 @@ function parseCommonFormatSnakeCaseKeys(line) {
 
 function parseCommonFormatDatetime(datetimeString) {
   var matches = datetimeString.match(COMMON_LOG_FORMAT_DATETIME_REGEX);
+
+  if (!matches) {
+    console.log(`String does not match Date and time, in Common Log Format: ${datetimeString}`);
+    return;
+  }
+
   const groups = matches.groups;
 
   return new Date(
