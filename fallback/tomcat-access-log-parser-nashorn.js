@@ -58,7 +58,10 @@ function parseCommonFormat(line) {
 }
 
 function parseCommonFormatSnakeCaseKeys(line) { // eslint-disable-line no-unused-vars
-  var logData = JSON.parse(parseCommonFormat(line));
+  var standardJsonString = parseCommonFormat(line);
+  if (!standardJsonString) { return; }
+
+  var logData = JSON.parse(standardJsonString);
   var snakeCaseKeysLogData = {};
 
   for (var key in logData) {
@@ -78,8 +81,11 @@ function parseCommonFormatDatetime(datetimeString) {
     return;
   }
 
+  var paddedMonthNumber = (MONTHS.indexOf(matches[2]) + 1).toString();
+  if (paddedMonthNumber.length === 1) { paddedMonthNumber = ['0', paddedMonthNumber].join(''); }
+
   return new Date([
-    matches[3], '-', (MONTHS.indexOf(matches[2]) + 1).toString(), '-', matches[1],
+    matches[3], '-', paddedMonthNumber, '-', matches[1],
     'T', matches[4], ':', matches[5], ':', matches[6], '.000', matches[7]
   ].join(''));
 }

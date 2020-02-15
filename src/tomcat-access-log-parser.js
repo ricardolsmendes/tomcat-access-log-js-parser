@@ -36,7 +36,7 @@ const COMMON_LOG_FORMAT_DATETIME_REGEX = new RegExp('' +
 );
 
 function parseCommonFormat(line) {
-  var matches = line.match(COMMON_LOG_FORMAT_REGEX);
+  const matches = line.match(COMMON_LOG_FORMAT_REGEX);
 
   if (!matches) {
     console.log(`Line does not match Common Log Format: ${line}`);
@@ -60,7 +60,10 @@ function parseCommonFormat(line) {
 }
 
 function parseCommonFormatSnakeCaseKeys(line) {
-  const logData = JSON.parse(parseCommonFormat(line));
+  const standardJsonString = parseCommonFormat(line);
+  if (!standardJsonString) { return; }
+
+  const logData = JSON.parse(standardJsonString);
   const snakeCaseKeysLogData = {};
 
   Object.entries(logData).forEach(([key, value]) => {
@@ -82,8 +85,11 @@ function parseCommonFormatDatetime(datetimeString) {
 
   const groups = matches.groups;
 
+  let paddedMonthNumber = (MONTHS.indexOf(groups.month) + 1).toString();
+  if (paddedMonthNumber.length === 1) { paddedMonthNumber = `0${paddedMonthNumber}`; }
+
   return new Date(
-    `${groups.year}-${(MONTHS.indexOf(groups.month) + 1).toString()}-${groups.day}` +
+    `${groups.year}-${paddedMonthNumber}-${groups.day}` +
     `T${groups.hour}:${groups.minute}:${groups.second}.000${groups.timezone}`
   );
 }

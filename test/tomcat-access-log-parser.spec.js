@@ -43,13 +43,19 @@ describe('tomcat-access-log-parser', () => {
       assert.strictEqual(logData.remoteUser, null);
     });
 
-    it('parses the Datetime field according to universal time', () => {
+    it('parses the Date and Time field according to universal time', () => {
       const logData = JSON.parse(
         parseCommonFormat('127.0.0.1 - - [23/Nov/2019:23:59:52 -0200] "GET" 200 482'));
       assert.deepStrictEqual(logData.datetime, '2019-11-24T01:59:52.000Z');
     });
 
-    it('ignores the Datetime field when it does not match the pattern', () => {
+    it('parses the Date and Time field for one-digit month numbers', () => {
+      const logData = JSON.parse(
+        parseCommonFormat('127.0.0.1 - - [01/Sep/2019:00:02:27 -0300] "GET" 200 482'));
+      assert.deepStrictEqual(logData.datetime, '2019-09-01T03:02:27.000Z');
+    });
+
+    it('ignores the Date and Time field when it does not match the pattern', () => {
       const logData = JSON.parse(
         parseCommonFormat('127.0.0.1 - - [23/Nov/2019:23:59:52-0200] "GET" 200 482'));
       assert(!logData.datetime);
@@ -80,7 +86,7 @@ describe('tomcat-access-log-parser', () => {
       assert.strictEqual(logData.bytesSent, 0);
     });
 
-    it('returns null when a given line does not match the pattern', () => {
+    it('returns nothing when a given line does not match the pattern', () => {
       const logData = parseCommonFormat(
         '127.0.0.1--[23/Nov/2019:23:59:52 -0200]"GET"200-');
       assert(!logData);
@@ -120,6 +126,12 @@ describe('tomcat-access-log-parser', () => {
           '127.0.0.1 - - [23/Nov/2019:23:59:52 -0200] "GET" 200 482'));
       assert.strictEqual(logData.bytes_sent, 482);
       assert.strictEqual(logData.bytesSent, undefined);
+    });
+
+    it('returns nothing when a given line does not match the pattern', () => {
+      const logData = parseCommonFormatSnakeCaseKeys(
+        '127.0.0.1--[23/Nov/2019:23:59:52 -0200]"GET"200-');
+      assert(!logData);
     });
 
   });
