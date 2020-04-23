@@ -8,10 +8,10 @@ The `parseCommonFormat(line)` and `parseCommonFormatSnakeCaseKeys(line)` functio
 built-in Javascript features and return the log entry converted into a JSON string. They were
 designed to work properly even in resource-limited environments:
 
-| COMPLIANT PLATFORM | LIBRARY VERSION | SOURCE FILE |
-| --- | --- | --- |
-| Node.js 10+ | Standard | [./src/tomcat-access-log-parser.js][5] |
-| Nashorn JDK 8 | Fallback | [./fallback/tomcat-access-log-parser-nashorn.js][6] |
+| COMPLIANT PLATFORM | LIBRARY VERSION | SOURCE FILE                                         |
+| ------------------ | :-------------: | --------------------------------------------------- |
+| Node.js 10+        |    Standard     | [./src/tomcat-access-log-parser.js][5]              |
+| Nashorn JDK 8      |    Fallback     | [./fallback/tomcat-access-log-parser-nashorn.js][6] |
 
 If you're looking for a higher-level design, please consider [access-logs-js-parser][7],
 which is built upon this library and adds an abstraction layer over it.
