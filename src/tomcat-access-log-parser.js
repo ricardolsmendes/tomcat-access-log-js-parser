@@ -76,7 +76,7 @@ function parseCommonFormatSnakeCaseKeys(line) {
 }
 
 function parseCommonFormatDatetime(datetimeString) {
-  var matches = datetimeString.match(COMMON_LOG_FORMAT_DATETIME_REGEX);
+  const matches = datetimeString.match(COMMON_LOG_FORMAT_DATETIME_REGEX);
 
   if (!matches) {
     console.log(`String does not match Date and time, in Common Log Format: ${datetimeString}`);

@@ -10,7 +10,7 @@ const {
 
 describe('tomcat-access-log-parser', () => {
 
-  var consoleLogStub;
+  let consoleLogStub;
 
   before(() => {
     consoleLogStub = sinon.stub(console, 'log');
